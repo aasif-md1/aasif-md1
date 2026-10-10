@@ -1,194 +1,70 @@
 <div align="center">
 
-<img src="assets/folio-cover.svg" width="100%" alt="Aasif — software developer, systems and product engineering">
+```text
+┌─────────────────────────────────────────────────────────────────────┐
+│  AASIF / SOFTWARE DEVELOPER                                         │
+│                                                                     │
+│  Web apps. Real-time systems. Full-stack products.                   │
+└─────────────────────────────────────────────────────────────────────┘
+```
 
-<br>
-
-<a href="https://mdportfolio-eta.vercel.app/">PORTFOLIO ↗</a>
-&nbsp;&nbsp;&nbsp; <a href="https://github.com/aasif-md1?tab=repositories">WORK / REPOSITORIES ↗</a>
-&nbsp;&nbsp;&nbsp; <a href="https://www.linkedin.com/in/md-aasif-7bb514305/">LINKEDIN ↗</a>
+[Portfolio](https://mdportfolio-eta.vercel.app/) · [Projects](https://github.com/aasif-md1?tab=repositories) · [LinkedIn](https://www.linkedin.com/in/md-aasif-7bb514305/)
 
 </div>
 
-<br>
+```ts
+const aasif = {
+  role: "Software Developer",
+  worksWith: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL"],
+  interestedIn: ["product engineering", "real-time apps", "AI interfaces"],
+};
+```
 
-<table>
-<tr>
-<td width="60%" valign="top">
-
-<sub>01 / THE DEVELOPER</sub>
-
-## I build the whole flow.
-
-I'm Aasif — a software developer drawn to the space between a good interface and the system behind it.
-
-I work across web applications, real-time experiences, AI interfaces, and full-stack products. I care about how the pieces communicate: the interaction, the API, the data, and the details users notice when everything works together.
-
-</td>
-<td width="40%" valign="top">
-
-<img src="assets/system-blueprint.svg" width="100%" alt="System blueprint connecting interface, services, data and delivery">
-
-</td>
-</tr>
-</table>
+I build web applications from the UI through to the backend. Most interested in projects where the parts have to work together — auth, APIs, shared state, data, and the experience around them.
 
 ---
 
-<sub>02 / PROJECT FILES</sub>
+### `~/projects`
 
-## Selected work
-
-<table>
-<tr>
-<td width="50%" valign="top">
-
-<a href="https://github.com/aasif-md1/watch-party-app"><img src="assets/work-watchparty.svg" width="100%" alt="WatchParty — real-time shared viewing project"></a>
-
-**[WatchParty ↗](https://github.com/aasif-md1/watch-party-app)**
-
-A synchronized viewing room with screen sharing, live chat and video calling.
-
-<sub>React · Express · Socket.IO · WebRTC · Firebase Auth</sub>
-
-</td>
-<td width="50%" valign="top">
-
-<a href="https://github.com/aasif-md1/tribhuvan_portal"><img src="assets/work-tribhuvan.svg" width="100%" alt="Tribhuvan Portal — web, mobile and backend system"></a>
-
-**[Tribhuvan Portal ↗](https://github.com/aasif-md1/tribhuvan_portal)**
-
-A college management platform spanning web, mobile, shared logic and backend services.
-
-<sub>React · React Native · TypeScript · Express · PostgreSQL · Prisma</sub>
-
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
-<a href="https://github.com/aasif-md1/MultimodelAI"><img src="assets/work-multimodel.svg" width="100%" alt="MultimodelAI — multi-model AI application"></a>
-
-**[MultimodelAI ↗](https://github.com/aasif-md1/MultimodelAI)**
-
-An AI application with a React/Vite client and a separate Express server integrating model APIs.
-
-<sub>React · Vite · Express · Groq API · Hugging Face</sub>
-
-</td>
-<td width="50%" valign="top">
-
-<a href="https://github.com/aasif-md1/ai-resume-builder"><img src="assets/work-resume.svg" width="100%" alt="AI Resume Builder — resume creation application"></a>
-
-**[AI Resume Builder ↗](https://github.com/aasif-md1/ai-resume-builder)**
-
-A focused resume-building web app, designed around turning a blank page into a usable application document.
-
-<sub>React · Vite · JavaScript · Tailwind CSS</sub>
-
-</td>
-</tr>
-</table>
-
-<details>
-<summary><strong>More from the workbench</strong></summary>
-
-- **[NoteSpace](https://github.com/aasif-md1/NoteSpace)** — a Flutter notes and to-do app.
-- **[Personal portfolio](https://github.com/aasif-md1/md.portfolio)** — portfolio site and project index.
-
-</details>
+| Repository | What it does | Stack |
+|:--|:--|:--|
+| **[watch-party-app](https://github.com/aasif-md1/watch-party-app)** · [Live](https://watchparty.website) | Synchronized YouTube rooms, screen sharing, chat and video calls. | React · Express · Socket.IO · WebRTC |
+| **[tribhuvan_portal](https://github.com/aasif-md1/tribhuvan_portal)** · [Live](https://tribhuvan-portal-web.vercel.app/) | College platform with web, mobile, shared packages and backend in one monorepo. | React · React Native · TypeScript · PostgreSQL · Prisma |
+| **[MultimodelAI](https://github.com/aasif-md1/MultimodelAI)** · [Live](https://multimodal-ai-seven.vercel.app/) | Multimodal AI interface backed by a separate API server. | React · Vite · Express · Groq · Hugging Face |
+| **[ai-resume-builder](https://github.com/aasif-md1/ai-resume-builder)** · [Live](https://ai-resume-builder-iota-lake-23.vercel.app/) | A web app for building and refining resumes. | React · Vite · JavaScript |
+| **[NoteSpace](https://github.com/aasif-md1/NoteSpace)** | Flutter notes and to-do app. | Dart · Flutter |
 
 ---
 
-<sub>03 / ENGINEERING TOOLKIT</sub>
+### `~/toolbox`
 
-<img src="assets/toolchain-map.svg" width="100%" alt="Toolchain map across interface, services, data and delivery">
+**Frontend**  
+`React` `TypeScript` `JavaScript` `HTML` `CSS` `Vite`
 
-<table>
-<tr>
-<td width="25%" valign="top">
+**Backend & APIs**  
+`Node.js` `Express` `REST APIs` `Socket.IO`
 
-**INTERFACE**
+**Data & auth**  
+`PostgreSQL` `Prisma` `Firebase` `Supabase`
 
-React  
-TypeScript  
-JavaScript  
-HTML / CSS
+**Mobile**  
+`React Native` `Expo` `Flutter`
 
-</td>
-<td width="25%" valign="top">
-
-**SERVICES**
-
-Node.js  
-Express  
-Python  
-Dart / Flutter
-
-</td>
-<td width="25%" valign="top">
-
-**DATA & IDENTITY**
-
-PostgreSQL  
-Prisma  
-Firebase  
-Supabase
-
-</td>
-<td width="25%" valign="top">
-
-**BUILD & SHIP**
-
-Git / GitHub  
-Vite  
-Vercel  
-REST APIs
-
-</td>
-</tr>
-</table>
+**Workflow**  
+`Git` `GitHub` `Vercel`
 
 ---
 
-<sub>04 / WORKING PRINCIPLES</sub>
+### `~/currently`
 
-<table>
-<tr>
-<td width="33%" valign="top">
-
-**01 — Make it clear**
-
-Interfaces should explain themselves. Good design removes friction rather than decorating it.
-
-</td>
-<td width="33%" valign="top">
-
-**02 — Connect the layers**
-
-A feature is more than a screen. Data, APIs, state, authentication and failure cases matter too.
-
-</td>
-<td width="34%" valign="top">
-
-**03 — Learn by shipping**
-
-Build, debug, observe what breaks, then make the next iteration better.
-
-</td>
-</tr>
-</table>
+- Building and improving full-stack projects.
+- Learning through implementation, debugging, and shipping working features.
+- Interested in developer tools, useful AI products, and clean application architecture.
 
 ---
 
 <div align="center">
 
-<a href="https://mdportfolio-eta.vercel.app/">PORTFOLIO</a> &nbsp; / &nbsp;
-<a href="https://github.com/aasif-md1?tab=repositories">ALL REPOSITORIES</a> &nbsp; / &nbsp;
-<a href="https://www.linkedin.com/in/md-aasif-7bb514305/">LINKEDIN</a>
-
-<img src="assets/folio-footer.svg" width="100%" alt="Editorial footer line">
-
-<sub>PERSONAL ENGINEERING FOLIO / AASIF-MD1</sub>
+**More code, less noise.**
 
 </div>
