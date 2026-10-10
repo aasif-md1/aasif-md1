@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="145" viewBox="0 0 1120 145">
+<rect width="1120" height="145" rx="3" fill="#111B21" stroke="#43535A"/>
+<g font-family="monospace">
+<text x="24" y="31" fill="#F18B62" font-size="11" letter-spacing="2">01 / INTERFACE</text><text x="24" y="61" fill="#F1EFE8" font-size="16">React · TypeScript</text><text x="24" y="85" fill="#AFC0C2" font-size="12">JavaScript · HTML · CSS</text>
+<path d="M275 18V126" stroke="#35474E"/>
+<text x="300" y="31" fill="#F18B62" font-size="11" letter-spacing="2">02 / SERVICES</text><text x="300" y="61" fill="#F1EFE8" font-size="16">Node.js · Express</text><text x="300" y="85" fill="#AFC0C2" font-size="12">Python · Dart · Flutter</text>
+<path d="M550 18V126" stroke="#35474E"/>
+<text x="575" y="31" fill="#F18B62" font-size="11" letter-spacing="2">03 / DATA</text><text x="575" y="61" fill="#F1EFE8" font-size="16">PostgreSQL · Prisma</text><text x="575" y="85" fill="#AFC0C2" font-size="12">Firebase · Supabase</text>
+<path d="M825 18V126" stroke="#35474E"/>
+<text x="850" y="31" fill="#F18B62" font-size="11" letter-spacing="2">04 / DELIVERY</text><text x="850" y="61" fill="#F1EFE8" font-size="16">Git · GitHub · Vite</text><text x="850" y="85" fill="#AFC0C2" font-size="12">Vercel · REST APIs</text>
+</g>
+<path d="M24 111H1096" stroke="#35474E"/><circle cx="1096" cy="111" r="4" fill="#F18B62"/>
+</svg>

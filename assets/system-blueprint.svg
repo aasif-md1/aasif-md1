@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="290" viewBox="0 0 440 290">
+<rect width="440" height="290" rx="3" fill="#111B21" stroke="#43535A"/>
+<text x="22" y="30" fill="#F18B62" font-family="monospace" font-size="12" letter-spacing="2">SYSTEM BLUEPRINT / 04 LAYERS</text>
+<g stroke="#4E656C" stroke-width="1.5" fill="none">
+ <path d="M220 65V83 M220 117V135 M220 169V187 M220 221V239"/>
+ <path d="M55 100H100 M340 100H385 M55 170H100 M340 170H385" stroke-dasharray="3 4"/>
+</g>
+<g font-family="monospace" text-anchor="middle">
+ <rect x="100" y="50" width="240" height="34" fill="#18272D" stroke="#F18B62"/><text x="220" y="71" fill="#F1EFE8" font-size="13">INTERFACE</text>
+ <rect x="100" y="102" width="240" height="34" fill="#18272D" stroke="#536C73"/><text x="220" y="123" fill="#F1EFE8" font-size="13">APPLICATION LOGIC</text>
+ <rect x="100" y="154" width="240" height="34" fill="#18272D" stroke="#536C73"/><text x="220" y="175" fill="#F1EFE8" font-size="13">DATA / INTEGRATION</text>
+ <rect x="100" y="206" width="240" height="34" fill="#18272D" stroke="#536C73"/><text x="220" y="227" fill="#F1EFE8" font-size="13">DELIVERY</text>
+</g>
+<circle cx="220" cy="255" r="4" fill="#F18B62"/><path d="M22 255H211 M229 255H418" stroke="#43535A"/>
+<text x="22" y="277" fill="#9DAEB0" font-family="monospace" font-size="10">A FEATURE IS A FLOW, NOT A SCREEN.</text>
+</svg>
