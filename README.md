@@ -1,70 +1,129 @@
 <div align="center">
 
-```text
-┌─────────────────────────────────────────────────────────────────────┐
-│  AASIF / SOFTWARE DEVELOPER                                         │
-│                                                                     │
-│  Web apps. Real-time systems. Full-stack products.                   │
-└─────────────────────────────────────────────────────────────────────┘
-```
+<img src="assets/code-header.svg" width="100%" alt="Aasif — Software Developer">
 
-[Portfolio](https://mdportfolio-eta.vercel.app/) · [Projects](https://github.com/aasif-md1?tab=repositories) · [LinkedIn](https://www.linkedin.com/in/md-aasif-7bb514305/)
+<br>
+
+<a href="https://mdportfolio-eta.vercel.app/"><img src="https://img.shields.io/badge/PORTFOLIO-161B22?style=for-the-badge&logo=vercel&logoColor=7DD3FC" alt="Portfolio"></a>
+<a href="https://github.com/aasif-md1?tab=repositories"><img src="https://img.shields.io/badge/PROJECTS-161B22?style=for-the-badge&logo=github&logoColor=7DD3FC" alt="Projects"></a>
+<a href="https://www.linkedin.com/in/md-aasif-7bb514305/"><img src="https://img.shields.io/badge/LINKEDIN-161B22?style=for-the-badge&logo=linkedin&logoColor=7DD3FC" alt="LinkedIn"></a>
 
 </div>
 
-```ts
-const aasif = {
-  role: "Software Developer",
-  worksWith: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL"],
-  interestedIn: ["product engineering", "real-time apps", "AI interfaces"],
+<table>
+<tr>
+<td width="58%" valign="top">
+
+### `whoami`
+
+I'm Aasif — a software developer building web applications, real-time experiences and AI-powered interfaces.
+
+I like working across the whole feature: the UI, application state, APIs, authentication and the data behind it.
+
+</td>
+<td width="42%" valign="top">
+
+```js
+const stack = {
+  frontend: ["React", "TypeScript"],
+  backend: ["Node.js", "Express"],
+  data: ["PostgreSQL", "Firebase"],
+  realtime: ["Socket.IO", "WebRTC"]
 };
 ```
 
-I build web applications from the UI through to the backend. Most interested in projects where the parts have to work together — auth, APIs, shared state, data, and the experience around them.
+</td>
+</tr>
+</table>
 
 ---
 
-### `~/projects`
+## `01 / FEATURED PROJECTS`
 
-| Repository | What it does | Stack |
-|:--|:--|:--|
-| **[watch-party-app](https://github.com/aasif-md1/watch-party-app)** · [Live](https://watchparty.website) | Synchronized YouTube rooms, screen sharing, chat and video calls. | React · Express · Socket.IO · WebRTC |
-| **[tribhuvan_portal](https://github.com/aasif-md1/tribhuvan_portal)** · [Live](https://tribhuvan-portal-web.vercel.app/) | College platform with web, mobile, shared packages and backend in one monorepo. | React · React Native · TypeScript · PostgreSQL · Prisma |
-| **[MultimodelAI](https://github.com/aasif-md1/MultimodelAI)** · [Live](https://multimodal-ai-seven.vercel.app/) | Multimodal AI interface backed by a separate API server. | React · Vite · Express · Groq · Hugging Face |
-| **[ai-resume-builder](https://github.com/aasif-md1/ai-resume-builder)** · [Live](https://ai-resume-builder-iota-lake-23.vercel.app/) | A web app for building and refining resumes. | React · Vite · JavaScript |
-| **[NoteSpace](https://github.com/aasif-md1/NoteSpace)** | Flutter notes and to-do app. | Dart · Flutter |
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### [WatchParty ↗](https://github.com/aasif-md1/watch-party-app)
+
+<a href="https://watchparty.website"><img src="https://img.shields.io/badge/LIVE_DEMO-watchparty.website-16232B?style=flat-square&logo=googlechrome&logoColor=7DD3FC" alt="Live demo"></a>
+
+Watch YouTube together with synchronized playback, screen sharing, room chat and video calls.
+
+`React` `Express` `Socket.IO` `WebRTC` `Firebase Auth`
+
+</td>
+<td width="50%" valign="top">
+
+### [Tribhuvan Portal ↗](https://github.com/aasif-md1/tribhuvan_portal)
+
+A college platform structured as a monorepo, bringing together web, mobile, shared packages and backend services.
+
+`React` `React Native` `TypeScript` `Express` `PostgreSQL` `Prisma`
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### [MultimodelAI ↗](https://github.com/aasif-md1/MultimodelAI)
+
+A multimodal AI application with a React/Vite client and a separate Express server for model API integrations.
+
+`React` `Vite` `Express` `Groq API` `Hugging Face`
+
+<a href="https://multimodal-ai-seven.vercel.app/"><sub>OPEN LIVE APP ↗</sub></a>
+
+</td>
+<td width="50%" valign="top">
+
+### [AI Resume Builder ↗](https://github.com/aasif-md1/ai-resume-builder)
+
+A resume-building web application focused on creating and refining job-application documents.
+
+`React` `Vite` `JavaScript` `Tailwind CSS`
+
+<a href="https://ai-resume-builder-iota-lake-23.vercel.app/"><sub>OPEN LIVE APP ↗</sub></a>
+
+</td>
+</tr>
+</table>
 
 ---
 
-### `~/toolbox`
+## `02 / TECH I USE`
 
-**Frontend**  
-`React` `TypeScript` `JavaScript` `HTML` `CSS` `Vite`
+<div align="center">
 
-**Backend & APIs**  
-`Node.js` `Express` `REST APIs` `Socket.IO`
+<img src="https://skillicons.dev/icons?i=react,ts,js,nodejs,express,python,postgres,prisma,firebase,supabase,flutter,dart,html,css,vite,git,github,vercel&theme=dark&perline=9" alt="Technologies: React, TypeScript, JavaScript, Node.js, Express, Python, PostgreSQL, Prisma, Firebase, Supabase, Flutter, Dart, HTML, CSS, Vite, Git, GitHub and Vercel">
 
-**Data & auth**  
-`PostgreSQL` `Prisma` `Firebase` `Supabase`
-
-**Mobile**  
-`React Native` `Expo` `Flutter`
-
-**Workflow**  
-`Git` `GitHub` `Vercel`
+</div>
 
 ---
 
-### `~/currently`
+## `03 / GITHUB`
 
-- Building and improving full-stack projects.
-- Learning through implementation, debugging, and shipping working features.
-- Interested in developer tools, useful AI products, and clean application architecture.
+<div align="center">
+
+<a href="https://github.com/aasif-md1">
+  <img height="165" src="https://github-readme-stats.vercel.app/api?username=aasif-md1&show_icons=true&hide_border=true&bg_color=0D1117&title_color=7DD3FC&text_color=C9D1D9&icon_color=F4B860&rank_icon=github" alt="Aasif's GitHub statistics">
+</a>
+<a href="https://github.com/aasif-md1">
+  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=aasif-md1&layout=compact&hide_border=true&bg_color=0D1117&title_color=7DD3FC&text_color=C9D1D9" alt="Most used programming languages">
+</a>
+
+<br>
+
+<img src="https://github-readme-streak-stats.herokuapp.com?user=aasif-md1&hide_border=true&background=0D1117&ring=7DD3FC&fire=F4B860&currStreakLabel=7DD3FC&sideLabels=C9D1D9&dates=8B949E&currStreakNum=C9D1D9&sideNums=C9D1D9" alt="GitHub contribution streak">
+
+</div>
 
 ---
 
 <div align="center">
 
-**More code, less noise.**
+**Building. Breaking. Debugging. Shipping.**
+
+[Portfolio](https://mdportfolio-eta.vercel.app/) · [All repositories](https://github.com/aasif-md1?tab=repositories) · [LinkedIn](https://www.linkedin.com/in/md-aasif-7bb514305/)
 
 </div>
