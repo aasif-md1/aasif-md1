@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="390" viewBox="0 0 1200 390">
+<defs>
+  <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#26302A" stroke-width="1"/></pattern>
+  <linearGradient id="fade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#111714"/><stop offset="1" stop-color="#0A0D0C"/></linearGradient>
+</defs>
+<rect width="1200" height="390" fill="url(#fade)"/>
+<rect width="1200" height="390" fill="url(#grid)" opacity=".72"/>
+<rect x="18" y="18" width="1164" height="354" rx="5" fill="none" stroke="#3B473F"/>
+<path d="M760 18V372 M795 18V372 M830 18V372 M865 18V372 M900 18V372 M935 18V372 M970 18V372 M1005 18V372 M1040 18V372 M1075 18V372 M1110 18V372 M1145 18V372" stroke="#27332B" stroke-width="1"/>
+<path d="M760 65H1182 M760 112H1182 M760 159H1182 M760 206H1182 M760 253H1182 M760 300H1182 M760 347H1182" stroke="#27332B" stroke-width="1"/>
+<rect x="58" y="58" width="9" height="9" fill="#C6F277"/>
+<text x="82" y="67" fill="#C6F277" font-family="monospace" font-size="14" letter-spacing="3">AASIF / ENGINEERING LOG 001</text>
+<text x="56" y="157" fill="#E9E7DE" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="700" letter-spacing="-4">Build with intent.</text>
+<text x="61" y="205" fill="#B8C1B9" font-family="monospace" font-size="22" letter-spacing="1.5">SOFTWARE DEVELOPER</text>
+<line x1="60" y1="236" x2="442" y2="236" stroke="#C6F277" stroke-width="3"/>
+<text x="60" y="270" fill="#A3AEA5" font-family="monospace" font-size="15">WEB SYSTEMS  /  PRODUCT INTERFACES  /  FULL-STACK BUILDS</text>
+<text x="60" y="333" fill="#657269" font-family="monospace" font-size="12" letter-spacing="2">DESIGN THE FLOW. ENGINEER THE DETAILS.</text>
+<!-- system diagram -->
+<circle cx="940" cy="180" r="93" fill="#0C100E" stroke="#3C4B40" stroke-width="1.5"/>
+<circle cx="940" cy="180" r="68" fill="none" stroke="#425347" stroke-dasharray="3 7"/>
+<circle cx="940" cy="180" r="41" fill="#151D17" stroke="#C6F277" stroke-width="1.5"/>
+<path d="M940 87V139 M940 221V273 M847 180H899 M981 180H1033 M874 114L911 151 M969 209L1006 246 M1006 114L969 151 M911 209L874 246" stroke="#6F8874" stroke-width="1.5"/>
+<circle cx="940" cy="87" r="5" fill="#C6F277"/><circle cx="1033" cy="180" r="5" fill="#C6F277"/><circle cx="940" cy="273" r="5" fill="#C6F277"/><circle cx="847" cy="180" r="5" fill="#C6F277"/>
+<text x="940" y="176" fill="#E9E7DE" font-family="monospace" font-size="12" text-anchor="middle">IDEA</text>
+<text x="940" y="192" fill="#C6F277" font-family="monospace" font-size="10" text-anchor="middle">→ BUILD</text>
+<text x="1090" y="330" fill="#87958A" font-family="monospace" font-size="11" text-anchor="middle">SYS / 001</text>
+<path d="M60 350H430" stroke="#334137"/><circle cx="430" cy="350" r="3" fill="#C6F277"/>
+</svg>
