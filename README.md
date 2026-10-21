@@ -54,4 +54,10 @@ const aasif = {
 
 <img src="assets/roadmap.svg" alt="Career roadmap drawn as a metro line: Student, Frontend, Full-Stack, Software Developer" width="100%" />
 
+### `~/commit-bot`
+
+<img src="assets/bot.svg" alt="A small robot sweeping my GitHub contribution board, clearing a tile for every active day" width="100%" />
+
+<sub>Rebuilt every night from my real GitHub activity — the bot clears one tile for every day I shipped something.</sub>
+
 <img src="assets/footer.svg" alt="git commit -m 'keep learning. keep building. keep shipping.'" width="100%" />
