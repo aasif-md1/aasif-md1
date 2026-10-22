@@ -3,17 +3,18 @@
 Commit Snake
 ------------
 Your last 12 months of GitHub contributions become a board of tiles (darker = more commits).
-A little snake slithers over the board column by column and eats every active tile.
-Each tile it eats adds a body segment in the SAME colour right behind its head (the older
-colours shift back), so the snake slowly becomes a colourful record of your year. When it
-reaches the end of the board it turns around and slithers back, then the board resets (pure SVG).
+A little snake hunts down every active tile, always taking the shortest route to the nearest
+uneaten one (and eating anything it crosses on the way). Each tile it eats adds a body segment in
+the SAME colour right behind its head, and the oldest segment drops off the tail so the body never
+exceeds MAX_BODY dots. When the board is clear it takes the shortest way home, then the board
+resets and the hunt starts again (pure SVG animation).
 
     GITHUB_TOKEN=... python3 scripts/generate_snake.py --user aasif-md1 --out assets/snake.svg
     python3 scripts/generate_snake.py --mock  --out /tmp/snake.svg    # preview with fake data
     python3 scripts/generate_snake.py --empty --out assets/snake.svg  # placeholder
 Standard library only; the GitHub Action runs it every night.
 """
-import argparse, datetime as dt, json, os, random, sys, urllib.request
+import argparse, datetime as dt, heapq, json, os, random, sys, urllib.request
 
 QUERY = """query($login:String!,$from:DateTime!,$to:DateTime!){user(login:$login){contributionsCollection(from:$from,to:$to){
 contributionCalendar{totalContributions weeks{contributionDays{date contributionCount}}}}}}"""
@@ -21,9 +22,9 @@ MONO = "'JetBrains Mono','SF Mono',Menlo,Consolas,'DejaVu Sans Mono',monospace"
 PAPER, PAPER2, INK, ACC, YEL, MUTE = "#f4efe4", "#fffaf0", "#15120f", "#ff5a36", "#ffd84a", "#6a6358"
 LEVELS = ["#ece3d2", "#ffe99a", YEL, ACC, INK]
 P, CELL = 14, 11          # grid pitch / tile size
-STEP = 0.12               # seconds per cell (bigger = slower snake)
+STEP = 0.15               # seconds per cell (bigger = slower snake)
 END_PAUSE = 2.5           # seconds to rest before the board resets
-MAX_BODY = 7              # body never has more than this many coloured dots; the oldest drops off the tail
+MAX_BODY = 10             # body never has more than this many coloured dots; the oldest drops off the tail
 
 
 def fetch(login, token):
@@ -71,11 +72,51 @@ def render(days, total, login):
         q = sum(1 for x in counts if x <= c) / len(counts)
         return 1 if q <= .25 else 2 if q <= .5 else 3 if q <= .8 else 4
 
-    fwd = []                                           # serpentine route over every cell
-    for col in range(ncols):
-        fwd += [(col, r) for r in (range(7) if col % 2 == 0 else range(6, -1, -1))]
-    N = len(fwd)
-    route = fwd + fwd[-2::-1]                          # forward, then straight back
+    active = {pos for pos, (c, _) in cell.items() if level(c) > 0}
+    start = (0, 0)
+
+    DIRS = ((1, 0), (0, 1), (0, -1), (-1, 0))          # right, down, up, left: no diagonal moves ever
+
+    def find_path(src, goals, blocked, heading):
+        """Shortest grid path to the nearest goal; among equally short paths, the one with the fewest
+        turns (so it runs in straight lines instead of zig-zagging like a staircase)."""
+        s0 = (src, heading)
+        dist, prev, heap, cnt = {s0: (0, 0)}, {s0: None}, [(0, 0, 0, s0)], 1
+        while heap:
+            steps, turns, _, state = heapq.heappop(heap)
+            if dist.get(state) != (steps, turns): continue
+            cur, hd = state
+            if cur in goals and cur != src:
+                out = []
+                while state is not None:
+                    out.append(state[0]); state = prev[state]
+                return out[::-1][1:]
+            for d in DIRS:
+                nb = (cur[0] + d[0], cur[1] + d[1])
+                if not (0 <= nb[0] < ncols and 0 <= nb[1] < 7) or nb in blocked: continue
+                nd = (steps + 1, turns + (hd is not None and d != hd))
+                ns = (nb, d)
+                if ns not in dist or nd < dist[ns]:
+                    dist[ns], prev[ns] = nd, state
+                    heapq.heappush(heap, (nd[0], nd[1], cnt, ns)); cnt += 1
+        return None
+
+    def bfs(src, goals, blocked):
+        h = (route[-1][0] - route[-2][0], route[-1][1] - route[-2][1]) if len(route) > 1 else None
+        return find_path(src, goals, blocked, h)
+
+    route, eat_idx = [start], {}
+    if start in active: eat_idx[start] = 0
+    todo = active - set(eat_idx)
+    while todo:
+        body_cells = set(route[-MAX_BODY - 1:-1])      # try not to cross its own body
+        path = bfs(route[-1], todo, body_cells) or bfs(route[-1], todo, set())
+        for c in path:
+            route.append(c)
+            if c in todo: todo.discard(c); eat_idx[c] = len(route) - 1
+    if route[-1] != start:                             # shortest way home
+        route += bfs(route[-1], {start}, set(route[-MAX_BODY - 1:-1])) or bfs(route[-1], {start}, set())
+    if len(route) < 2: route = [start, start]
     M = len(route) - 1
     D = M * STEP + END_PAUSE                           # one full loop, seconds
     m = M * STEP / D                                   # fraction of the loop spent moving
@@ -84,20 +125,21 @@ def render(days, total, login):
     path = "M0 0 " + " ".join(f"L{center(c)[0] - sx:.1f} {center(c)[1] - sy:.1f}" for c in route[1:])
     motion = f'dur="{D:.2f}s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;1" keyTimes="0;{m:.5f};1" path="{path}"'
     kt = lambda t: f"{min(t / D, .9995):.5f}"
+    print(f"route: {M} steps, loop {D:.1f}s, {len(active)} tiles", file=sys.stderr)
 
     tiles, eaten = [], []                              # eaten = (time, colour) in eating order
-    for i, pos in enumerate(fwd):
-        if pos not in cell: continue
+    for pos in sorted(cell):
         c, d = cell[pos]
         lv = level(c)
         x, y = gx0 + pos[0] * P, gy0 + pos[1] * P
         if lv == 0:
             tiles.append(f'<rect x="{x:.1f}" y="{y}" width="{CELL}" height="{CELL}" rx="2" fill="{LEVELS[0]}"/>')
             continue
-        t = i * STEP
+        t = eat_idx[pos] * STEP
         eaten.append((t, LEVELS[lv]))
         tiles.append(f'<rect x="{x:.1f}" y="{y}" width="{CELL}" height="{CELL}" rx="2.5" fill="{LEVELS[lv]}" stroke="{INK}" stroke-width="1.3">'
                      f'<animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;{kt(t)};{kt(t + .05)};.9995;1" dur="{D:.2f}s" repeatCount="indefinite"/></rect>')
+    eaten.sort()
     n = len(eaten)
 
     body = []                                          # far end first so the neck is drawn on top
@@ -108,7 +150,7 @@ def render(days, total, login):
             times.append(eaten[j - 1][0]); cols.append(eaten[j - k][1])
         keyt = ";".join(kt(t) if i else "0" for i, t in enumerate(times)) + ";1"
         vals = ";".join(cols) + ";" + cols[-1]
-        sz = 12 - max(0, k - 4)                         # the last few segments taper like a tail
+        sz = 12 - max(0, k - 6) * .75                   # the last few segments taper like a tail
         body.append(
             f'<g transform="translate({sx:.1f} {sy:.1f})"><rect x="{-sz / 2:g}" y="{-sz / 2:g}" width="{sz}" height="{sz}" rx="{sz * .3:.1f}" fill="{cols[0]}" stroke="{INK}" stroke-width="1.6" opacity="0">'
             f'<animateMotion begin="{k * STEP:.2f}s" {motion}/>'
