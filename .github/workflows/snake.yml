@@ -1,4 +1,4 @@
-name: Update commit bot
+name: Update commit snake
 
 on:
   schedule:
@@ -7,24 +7,24 @@ on:
   push:
     paths:
       - "scripts/**"
-      - ".github/workflows/bot.yml"
+      - ".github/workflows/snake.yml"
 
 permissions:
   contents: write
 
 jobs:
-  bot:
+  snake:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build the board
+      - name: Feed the snake
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_USER: ${{ github.repository_owner }}
-        run: python3 scripts/generate_bot.py --user "$GH_USER" --out assets/bot.svg
+        run: python3 scripts/generate_snake.py --user "$GH_USER" --out assets/snake.svg
       - name: Commit if changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/bot.svg
-          if git diff --cached --quiet; then echo "No change."; else git commit -m "chore: refresh commit bot" && git push; fi
+          git add assets/snake.svg
+          if git diff --cached --quiet; then echo "No change."; else git commit -m "chore: refresh commit snake" && git push; fi
