@@ -46,10 +46,6 @@ const aasif = {
   <a href="https://ai-resume-builder-iota-lake-23.vercel.app">AI Resume Builder</a>
 </p>
 
-### `~/git log --graph`
-
-<img src="assets/journey.svg" alt="My projects drawn as a git log graph" width="100%" />
-
 ### `~/roadmap`
 
 <img src="assets/roadmap.svg" alt="Career roadmap drawn as a metro line: Student, Frontend, Full-Stack, Software Developer" width="100%" />
