@@ -316,6 +316,23 @@ def simulate(food, cols, start, cap):
             left.remove(step); eaten[step] = len(heads); size = min(cap, size + 1)
         body = ([step] + body)[:size]
         heads.append(step); lens.append(len(body))
+    # Return to (0, 0) and slide off the left edge before restarting
+    home_steps = 0
+    while body[0] != (0, 0) and home_steps < 300 and len(heads) < limit:
+        path = search(body, {(0, 0)}, cols)
+        step = path[0] if path else None
+        if step is None:
+            safe = [m for m in nbrs(body[0], cols) if m not in body[:-1]]
+            if not safe:
+                break
+            step = min(safe, key=lambda m: m[0] + m[1])
+        body = ([step] + body)[:size]
+        heads.append(step); lens.append(len(body))
+        home_steps += 1
+    for k in range(1, size + 1):
+        step = (-k, 0)
+        body = ([step] + body)[:size]
+        heads.append(step); lens.append(len(body))
     return heads, eaten, lens
 
 def snake(name, t, d):
@@ -324,7 +341,7 @@ def snake(name, t, d):
     top = max(list(cells.values()) + [1])
     food = {c for c, n in cells.items() if n}
     heads, eaten, lens = simulate(food, cols, s["start_length"], s["max_length"])
-    steps = len(heads) - 1; total = steps + 20; dur = total * s["seconds_per_step"]
+    steps = len(heads) - 1; total = steps + 6; dur = total * s["seconds_per_step"]
     cell, gap = 14, 3.6; pitch = cell + gap
     ox = (W - (cols*pitch - gap)) / 2; oy = 62
     H = int(oy + 7*pitch + 34)
@@ -351,10 +368,15 @@ def snake(name, t, d):
             return heads[j] if j >= 0 else (s["start_length"]-1 + j, 0)
         frames = []
         for k in range(steps + 1):
+            c = at(k)
+            vis = 1 if (k >= first and c[0] >= 0) else 0
             if 0 < k < steps:
-                a, m, z = at(k-1), at(k), at(k+1)
-                if (m[0]-a[0], m[1]-a[1]) == (z[0]-m[0], z[1]-m[1]) and k != first: continue
-            x, y = pos(at(k)); vis = 1 if k >= first else 0
+                a, m, z = at(k-1), c, at(k+1)
+                va = 1 if (k-1 >= first and a[0] >= 0) else 0
+                vz = 1 if (k+1 >= first and z[0] >= 0) else 0
+                if (m[0]-a[0], m[1]-a[1]) == (z[0]-m[0], z[1]-m[1]) and k != first and va == vis == vz:
+                    continue
+            x, y = pos(c)
             frames.append(f"{pct(k)}{{transform:translate({x:.1f}px,{y:.1f}px);opacity:{vis}}}")
         x, y = pos(at(steps)); frames.append(f"100%{{transform:translate({x:.1f}px,{y:.1f}px);opacity:0}}")
         css.append(f"@keyframes s{seg}{{{''.join(frames)}}}.s{seg}{{animation:s{seg} {dur:.2f}s linear infinite}}")
