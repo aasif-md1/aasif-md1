@@ -35,13 +35,17 @@ def svg(h, t, body, style=""):
 def card(name, t):
     art = (ROOT / "assets" / f"ascii-{name}.txt").read_text().rstrip("\n").split("\n")
     lh, cw, top = 7.0, 4.15, 50
-    H = int(max(top + len(art) * lh + 20, 480))
+    non_empty = [i for i, l in enumerate(art) if l.strip()]
+    last_idx = non_empty[-1] if non_empty else 0
+    min_lead = min((len(l) - len(l.lstrip()) for l in art if l.strip()), default=0)
+    H = int(max(top + last_idx * lh + 2, 480))
+    top_art = H - 2 - last_idx * lh
     b = [txt(22, 30, CFG["command"], t["mute"], 14)]
     for i, line in enumerate(art):
         if line.strip():
-            lead = len(line) - len(line.lstrip())
+            lead = len(line) - len(line.lstrip()) - min_lead
             s = line.strip()
-            b.append(txt(20 + lead*cw, top + i*lh, s, t["text"], 7, weight=700,
+            b.append(txt(1.5 + lead*cw, top_art + i*lh, s, t["text"], 7, weight=700,
                          extra=f'xml:space="preserve" textLength="{len(s)*cw:.1f}" lengthAdjust="spacingAndGlyphs"'))
     x = 530
     rows = len(CFG["info"]) + len(CFG["contacts"])

@@ -27,5 +27,6 @@
 <p align="center">
   <a href="https://mdportfolio-eta.vercel.app/">Portfolio</a> ·
   <a href="https://www.linkedin.com/in/md-aasif-7bb514305">LinkedIn</a> ·
-  <a href="https://www.instagram.com/__md_asif_01_/">Instagram</a>
+  <a href="https://www.instagram.com/__md_asif_01_/">Instagram</a> ·
+  <a href="mailto:mdaasif18903@gmail.com">Email</a>
 </p>
