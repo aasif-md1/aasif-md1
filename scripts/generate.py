@@ -388,6 +388,38 @@ def snake(name, t, d):
                  + "</g>")
     return svg(H, t, "".join(b), "".join(css))
 
+def buttons(name, t):
+    is_dark = name == "dark"
+    specs = [
+        ("btn-portfolio", "Portfolio", t["snake"],
+         '<circle cx="8" cy="8" r="6.5" fill="none" stroke="{c}" stroke-width="1.5"/>'
+         '<ellipse cx="8" cy="8" rx="3" ry="6.5" fill="none" stroke="{c}" stroke-width="1.4"/>'
+         '<line x1="1.5" y1="8" x2="14.5" y2="8" stroke="{c}" stroke-width="1.4"/>'),
+        ("btn-linkedin", "LinkedIn", "#58a6ff" if is_dark else "#0a66c2",
+         '<rect x="1.5" y="1.5" width="13" height="13" rx="2.5" fill="none" stroke="{c}" stroke-width="1.5"/>'
+         '<circle cx="5" cy="5.2" r="0.9" fill="{c}"/>'
+         '<line x1="5" y1="7.5" x2="5" y2="12" stroke="{c}" stroke-width="1.6" stroke-linecap="round"/>'
+         '<path d="M8 12V7.5M8 9.2c0-1.2 1-1.9 2-1.9s1.6.7 1.6 1.9V12" fill="none" stroke="{c}" stroke-width="1.6" stroke-linecap="round"/>'),
+        ("btn-instagram", "Instagram", "#f778ba" if is_dark else "#d63384",
+         '<rect x="1.5" y="1.5" width="13" height="13" rx="3.8" fill="none" stroke="{c}" stroke-width="1.5"/>'
+         '<circle cx="8" cy="8" r="3" fill="none" stroke="{c}" stroke-width="1.5"/>'
+         '<circle cx="11.8" cy="4.2" r="0.9" fill="{c}"/>'),
+        ("btn-email", "Email", "#e3b341" if is_dark else "#bf8700",
+         '<rect x="1.5" y="3" width="13" height="10" rx="2" fill="none" stroke="{c}" stroke-width="1.5"/>'
+         '<path d="M2 4l6 4.5L14 4" fill="none" stroke="{c}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'),
+    ]
+    out, w, h = {}, 142, 38
+    for key, label, color, icon in specs:
+        body = (
+            rect(0.5, 0.5, w - 1, h - 1, t["panel"], 9, f'stroke="{t["line"]}"')
+            + rect(8, 7, 24, 24, t["bg"], 6, f'stroke="{t["line"]}"')
+            + f'<g transform="translate(12,11)">{icon.format(c=color)}</g>'
+            + txt(42, 23.5, label, t["text"], 13, "start", 600)
+        )
+        out[key] = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
+                    f'font-family="{FONT}">{body}</svg>')
+    return out
+
 def waiting(t, label):
     return svg(150, t, txt(W/2, 70, label, t["text"], 16, "middle", 700) +
                txt(W/2, 100, "Waiting for data: Actions → Update profile README → Run workflow", t["mute"], 13, "middle"))
@@ -403,7 +435,8 @@ def main():
     for name, t in THEMES.items():
         files = {"card": card(name, t),
                  "stats": stats(name, t, d) if d else waiting(t, "GitHub stats"),
-                 "snake": snake(name, t, d) if d else waiting(t, "Contribution snake")}
+                 "snake": snake(name, t, d) if d else waiting(t, "Contribution snake"),
+                 **buttons(name, t)}
         if "--sample" in args:   # preview images must not pass as real stats
             for k in ("stats", "snake"):
                 files[k] = files[k].replace("</svg>", txt(W/2, 32, "SAMPLE DATA (preview only)", "#d29922", 14, "middle", 700) + "</svg>")

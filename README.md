@@ -25,8 +25,5 @@
 </p>
 
 <p align="center">
-  <a href="https://mdportfolio-eta.vercel.app/">Portfolio</a> ·
-  <a href="https://www.linkedin.com/in/md-aasif-7bb514305">LinkedIn</a> ·
-  <a href="https://www.instagram.com/__md_asif_01_/">Instagram</a> ·
-  <a href="mailto:mdaasif18903@gmail.com">Email</a>
+  <a href="https://mdportfolio-eta.vercel.app/"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/btn-portfolio-dark.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/btn-portfolio-light.svg"><img alt="Portfolio" src="./assets/btn-portfolio-dark.svg"></picture></a>&nbsp;&nbsp;<a href="https://www.linkedin.com/in/md-aasif-7bb514305"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/btn-linkedin-dark.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/btn-linkedin-light.svg"><img alt="LinkedIn" src="./assets/btn-linkedin-dark.svg"></picture></a>&nbsp;&nbsp;<a href="https://www.instagram.com/__md_asif_01_/"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/btn-instagram-dark.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/btn-instagram-light.svg"><img alt="Instagram" src="./assets/btn-instagram-dark.svg"></picture></a>&nbsp;&nbsp;<a href="mailto:mdaasif18903@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/btn-email-dark.svg"><source media="(prefers-color-scheme: light)" srcset="./assets/btn-email-light.svg"><img alt="Email" src="./assets/btn-email-dark.svg"></picture></a>
 </p>
