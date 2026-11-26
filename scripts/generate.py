@@ -344,7 +344,7 @@ def snake(name, t, d):
     steps = len(heads) - 1; total = steps + 6; dur = total * s["seconds_per_step"]
     cell, gap = 14, 3.6; pitch = cell + gap
     ox = (W - (cols*pitch - gap)) / 2; oy = 62
-    H = int(oy + 7*pitch + 34)
+    H = int(oy + 7*pitch + 20)
     pct = lambda k: f"{100*k/total:.3f}%"
     pos = lambda c: (ox + c[0]*pitch, oy + c[1]*pitch)
     css, b = [], [txt(22, 32, "$ ./snake --eat contributions", t["mute"], 14),
@@ -386,7 +386,6 @@ def snake(name, t, d):
                  + rect(off, off, sz, sz, t["snake"], 5 if seg == 0 else 4)
                  + ("".join(f'<circle cx="{cx}" cy="5" r="1.7" fill="{t["bg"]}"/>' for cx in (4.5, 9.5)) if seg == 0 else "")
                  + "</g>")
-    b.append(txt(22, H-14, f'snake length {s["start_length"]} → max {s["max_length"]}', t["mute"], 11))
     return svg(H, t, "".join(b), "".join(css))
 
 def waiting(t, label):
