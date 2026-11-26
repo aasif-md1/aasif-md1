@@ -130,6 +130,79 @@ def streaks(days):
 def panel(t, x, y, w, h, title):
     return rect(x, y, w, h, t["bg"], 8, f'stroke="{t["line"]}"') + txt(x+18, y+28, title, t["text"], 14, weight=700)
 
+def monthly_chart(name, t, x, y, w, h, labels, vals):
+    """Render monthly contribution bars with gradient caps + smooth running-total area curve."""
+    top = max(vals + [1])
+    total = sum(vals)
+    peak_i = vals.index(max(vals)) if vals else 0
+    step = w / max(len(vals), 1)
+    bw = min(step * 0.56, 46)
+    defs = (
+        f'<defs>'
+        f'<linearGradient id="bar-{name}" x1="0" y1="0" x2="0" y2="1">'
+        f'<stop offset="0%" stop-color="{t["levels"][4]}" stop-opacity="0.95"/>'
+        f'<stop offset="100%" stop-color="{t["levels"][1]}" stop-opacity="0.45"/>'
+        f'</linearGradient>'
+        f'<linearGradient id="peak-{name}" x1="0" y1="0" x2="0" y2="1">'
+        f'<stop offset="0%" stop-color="{t["snake"]}" stop-opacity="0.95"/>'
+        f'<stop offset="100%" stop-color="{t["snake"]}" stop-opacity="0.22"/>'
+        f'</linearGradient>'
+        f'<linearGradient id="area-{name}" x1="0" y1="0" x2="0" y2="1">'
+        f'<stop offset="0%" stop-color="{t["snake"]}" stop-opacity="0.22"/>'
+        f'<stop offset="100%" stop-color="{t["snake"]}" stop-opacity="0.01"/>'
+        f'</linearGradient>'
+        f'</defs>'
+    )
+    b = [defs]
+    # Header legend & peak pill
+    b.append(txt(x + w, y - 26, f'Peak: {labels[peak_i]} ({vals[peak_i]})  ·  Total: {total}', t["mute"], 11, "end"))
+    # Subtle horizontal dashed gridlines
+    for frac in (0.25, 0.5, 0.75, 1.0):
+        gy = y + h - (h - 18) * frac
+        b.append(f'<line x1="{x:.1f}" y1="{gy:.1f}" x2="{x+w:.1f}" y2="{gy:.1f}" '
+                 f'stroke="{t["line"]}" stroke-dasharray="3 4" stroke-opacity="0.7"/>')
+    b.append(f'<line x1="{x:.1f}" y1="{y+h:.1f}" x2="{x+w:.1f}" y2="{y+h:.1f}" stroke="{t["line"]}"/>')
+
+    # Smooth cubic Bezier curve + area for running total (drawn behind bars & labels)
+    acc, pts, s = 0, [], total or 1
+    for i, v in enumerate(vals):
+        acc += v
+        pts.append((x + step * (i + 0.5), y + h - (h - 18) * acc / s))
+    if len(pts) >= 2:
+        d_path = [f"M {pts[0][0]:.1f},{pts[0][1]:.1f}"]
+        for i in range(len(pts) - 1):
+            x0, y0 = pts[i]
+            x1, y1 = pts[i + 1]
+            cx_mid = (x0 + x1) / 2
+            d_path.append(f"C {cx_mid:.1f},{y0:.1f} {cx_mid:.1f},{y1:.1f} {x1:.1f},{y1:.1f}")
+        curve = " ".join(d_path)
+        area = f"{curve} L {pts[-1][0]:.1f},{y+h:.1f} L {pts[0][0]:.1f},{y+h:.1f} Z"
+        b.append(f'<path d="{area}" fill="url(#area-{name})"/>')
+        b.append(f'<path d="{curve}" fill="none" stroke="{t["snake"]}" stroke-width="2" stroke-opacity="0.85"/>')
+
+    # Gradient bars + bright top cap + value labels
+    for i, (l, v) in enumerate(zip(labels, vals)):
+        cx = x + step * i + step / 2
+        if v:
+            bh = max((h - 18) * v / top, 6)
+            by = y + h - bh
+            grad = f"peak-{name}" if i == peak_i else f"bar-{name}"
+            cap = t["snake"] if i == peak_i else t["text"]
+            b.append(rect(cx - bw / 2, by, bw, bh, f"url(#{grad})", 4))
+            b.append(rect(cx - bw / 2, by, bw, 2.5, cap, 1.5))
+            b.append(txt(cx, by - 6, v, cap if i == peak_i else t["text"], 10, "middle",
+                         700 if i == peak_i else 500,
+                         extra=f'stroke="{t["bg"]}" stroke-width="3" paint-order="stroke"'))
+        else:
+            b.append(f'<circle cx="{cx:.1f}" cy="{y+h:.1f}" r="2.2" fill="{t["levels"][2]}"/>')
+        b.append(txt(cx, y + h + 16, l, t["text"] if i == peak_i else t["mute"], 10, "middle",
+                     700 if i == peak_i else 400))
+
+    # Running total dots on top of bars so trajectory stays crisp
+    for px, py in pts:
+        b.append(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="3.2" fill="{t["snake"]}" stroke="{t["bg"]}" stroke-width="1.5"/>')
+    return "".join(b)
+
 def columns(t, x, y, w, h, labels, vals):
     top = max(vals + [1]); step = w / max(len(vals), 1); b = []
     for i, (l, v) in enumerate(zip(labels, vals)):
@@ -156,15 +229,8 @@ def stats(name, t, d):
     months = {}
     for date, n, _ in days: months[date[:7]] = months.get(date[:7], 0) + n
     keys = sorted(months)[-12:]; vals = [months[k] for k in keys]
-    b.append(panel(t, 20, 136, 960, 250, "Monthly contributions  (bars) + running total (line)"))
-    b.append(columns(t, 40, 190, 920, 165, [dt.date.fromisoformat(k+"-01").strftime("%b %y") for k in keys], vals))
-    acc, pts, s = 0, [], sum(vals) or 1
-    for i, v in enumerate(vals):
-        acc += v; pts.append((40 + 920/len(vals)*(i+.5), 355 - 150*acc/s))
-    b.append(f'<polyline fill="none" stroke="{t["snake"]}" stroke-width="2" points="' +
-             " ".join(f"{x:.1f},{y:.1f}" for x, y in pts) + '"/>')
-    b += [f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3" fill="{t["snake"]}"/>' for x, y in pts]
-    b.append(columns(t, 40, 190, 920, 165, [""]*len(vals), vals).replace('<rect', '<rect opacity="0"').replace('<line', '<line opacity="0"'))
+    b.append(panel(t, 20, 136, 960, 250, "Monthly contributions  (bars) + running total (curve)"))
+    b.append(monthly_chart(name, t, 40, 190, 920, 165, [dt.date.fromisoformat(k+"-01").strftime("%b %y") for k in keys], vals))
     # language donut
     b.append(panel(t, 20, 398, 475, 260, "Languages used  (by code size)"))
     ls = sorted(d["langs"].items(), key=lambda a: -a[1])
